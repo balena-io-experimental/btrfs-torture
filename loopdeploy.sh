@@ -63,7 +63,7 @@ PROJECTS=(
     # Debian Node
     https://github.com/resin-io-projects/resin-node-red
     # Debian Python
-    https://github.com/resin-io-projects/flick-remote.git
+    https://github.com/resin-io-projects/flick-remote
 )
 
 while : ; do
