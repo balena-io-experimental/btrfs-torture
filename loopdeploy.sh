@@ -68,7 +68,7 @@ PROJECTS=(
 
 while : ; do
     for project in "${PROJECTS[@]}"; do
-        echo "$project"
+        echo "Project: $project"
         DIR=$(basename "$project")
         if [ ! -d "$DIR" ]; then
             git clone "$project"
@@ -76,9 +76,14 @@ while : ; do
         cd "$DIR" || exit
         git remote rm debug || true
         git remote add debug "${REMOTE}"
+
         echo "pushing"
-        git push --force debug master
+        until git push --force debug master ; do
+            sleep 10
+            echo "retrying..."
+        done
         echo "pushing done"
+
         OUTPUT="";
         while [ "$(echo "$OUTPUT" | grep -c idle)" = 0 ]; do
             echo "Waiting"
